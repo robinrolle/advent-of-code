@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.*;
 import java.nio.file.*;
 import java.io.IOException;
+
 public class Aoc3 {
     public static void main(String[] args) {
         List<String> rucksacks = new ArrayList<>();
@@ -16,11 +17,29 @@ public class Aoc3 {
         }
 
         int sumOfPriorities = 0;
-        for (String rucksack : rucksacks) {
-            sumOfPriorities += findPriorityOfSharedItemType(rucksack);
+        for (int i = 0; i < rucksacks.size(); i += 3) {
+            sumOfPriorities += findPriorityOfCommonBadgeItem(rucksacks.subList(i, i + 3));
         }
 
         System.out.println("Sum of priorities: " + sumOfPriorities);
+    }
+
+    static int findPriorityOfCommonBadgeItem(List<String> group) {
+        Set<Character> commonItems = new HashSet<>();
+        for (char c : group.get(0).toCharArray()) {
+            commonItems.add(c);
+        }
+
+        for (int i = 1; i < group.size(); i++) {
+            Set<Character> currentRucksackItems = new HashSet<>();
+            for (char c : group.get(i).toCharArray()) {
+                currentRucksackItems.add(c);
+            }
+            commonItems.retainAll(currentRucksackItems);
+        }
+
+        char commonBadgeItem = commonItems.iterator().next();
+        return getItemPriority(commonBadgeItem);
     }
 
     static int findPriorityOfSharedItemType(String rucksack) {
