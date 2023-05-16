@@ -1,6 +1,10 @@
 package ch.hearc.aoc3;
 
+
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,5 +26,22 @@ public class Aoc3Test {
         assertEquals(26, Aoc3.getItemPriority('z'));
         assertEquals(27, Aoc3.getItemPriority('A'));
         assertEquals(52, Aoc3.getItemPriority('Z'));
+    }
+
+    @Test
+    void findPriorityOfCommonBadgeItemTest() {
+        List<String> group1 = Arrays.asList(
+                "vJrwpWtwJgWrhcsFMMfFFhFp",
+                "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+                "PmmdzqPrVvPwwTWBwg"
+        );
+        assertEquals(18, Aoc3.findPriorityOfCommonBadgeItem(group1));
+
+        List<String> group2 = Arrays.asList(
+                "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+                "ttgJtRGJQctTZtZT",
+                "CrZsJsPPZsGzwwsLwLmpwMDw"
+        );
+        assertEquals(52, Aoc3.findPriorityOfCommonBadgeItem(group2));
     }
 }
