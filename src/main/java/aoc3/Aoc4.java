@@ -1,21 +1,20 @@
-package ch.hearc.aoc4;
+package aoc3;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Aoc4 {
     public static void main(String[] args) {
-        String filePath = "src/aoc3/main/resources/Day4Input.txt";
+        String filePath = "Day4Input.txt";
         List<String> input = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                input.add(line);
-            }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream(filePath)))) {
+            input = br.lines().collect(Collectors.toList());
         } catch (IOException e) {
             System.err.println("Erreur lors de la lecture du fichier: " + e.getMessage());
         }
@@ -58,7 +57,7 @@ public class Aoc4 {
             int start2 = Integer.parseInt(range2[0]);
             int end2 = Integer.parseInt(range2[1]);
 
-            if ((start1 <= end2 && end1 >= start2) || (start2 <= end1 && end2 >= start1)) {
+            if ((start2 <= end1 && end2 >= start1)) {
                 count++;
             }
         }

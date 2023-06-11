@@ -1,16 +1,23 @@
-package ch.hearc.aoc3;
+package aoc3;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.*;
 import java.nio.file.*;
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 public class Aoc3 {
     public static void main(String[] args) {
         List<String> rucksacks = new ArrayList<>();
-        try {
-            rucksacks = Files.readAllLines(Paths.get("src/aoc3/main/resources/input.txt"));
+        // Il faut lire le fichier depuis le classpath
+        try(InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("Day3Input.txt");
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr)) {
+            rucksacks = br.lines().collect(Collectors.toList());
         } catch (IOException e) {
             System.err.println("Error reading input.txt: " + e.getMessage());
             System.exit(1);
